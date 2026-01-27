@@ -1,12 +1,5 @@
 'use client';
 import React, { useState } from 'react';
-// use State :Guardar y Cambiar datos en un componente 
-// texto
-// botones
-// formularios
-// contadores
-// colores
-// datos que vienen del usuario
 import { FileDown, FileText, Download, User, Briefcase, GraduationCap, Award, Mail, Phone, MapPin, Linkedin, Github, Plus, Trash2 } from 'lucide-react';
 
 // Types
@@ -47,50 +40,46 @@ interface Skill {
 }
 
 const ResumeGenerator: React.FC = () => {
-  // State for form data
   const [personalInfo, setPersonalInfo] = useState<PersonalInfo>({
-    fullName: 'Gerard Vigo Rodrigues',
-    email: 'vigogerard2025@gmail.com',
-    phone: '+51 973 474 568',
-    location: 'Trujillo, Peru',
-    linkedin: 'linkedin.com/in/gerard-vigo-5328b3268',
-    github: 'github.com/gerardvigo',
-    summary: 'Full-Stack Developer specialized in building scalable web applications using modern technologies.'
+    fullName: '',
+    email: '',
+    phone: '',
+    location: '',
+    linkedin: '',
+    github: '',
+    summary: ''
   });
 
   const [experiences, setExperiences] = useState<Experience[]>([
     {
       id: '1',
-      title: 'Frontend Developer Intern',
-      company: 'T-Money',
-      location: 'Remote',
-      startDate: '2023-01',
-      endDate: '2023-12',
+      title: '',
+      company: '',
+      location: '',
+      startDate: '',
+      endDate: '',
       current: false,
-      description: 'Collaborated with 5 interns to launch a mobile application that attracted over 10,000 users within 2 months.'
+      description: ''
     }
   ]);
 
   const [education, setEducation] = useState<Education[]>([
     {
       id: '1',
-      degree: 'Bachelor of Science in Software Development',
-      institution: 'Brigham Young University - Idaho',
-      location: 'Rexburg, ID',
-      graduationDate: '2026',
-      gpa: '3.8'
+      degree: '',
+      institution: '',
+      location: '',
+      graduationDate: '',
+      gpa: ''
     }
   ]);
 
   const [skills, setSkills] = useState<Skill[]>([
-    { id: '1', category: 'Frontend', items: 'React, Next.js, TypeScript, Tailwind CSS' },
-    { id: '2', category: 'Backend', items: 'Node.js, Python, REST APIs' },
-    { id: '3', category: 'Databases', items: 'PostgreSQL, MySQL, MongoDB' }
+    { id: '1', category: '', items: '' }
   ]);
 
   const [activeTab, setActiveTab] = useState<'edit' | 'preview'>('edit');
 
-  // Add new items
   const addExperience = () => {
     setExperiences([...experiences, {
       id: Date.now().toString(),
@@ -123,25 +112,28 @@ const ResumeGenerator: React.FC = () => {
     }]);
   };
 
-  // Remove items
   const removeExperience = (id: string) => {
-    setExperiences(experiences.filter(exp => exp.id !== id));
+    if (experiences.length > 1) {
+      setExperiences(experiences.filter(exp => exp.id !== id));
+    }
   };
 
   const removeEducation = (id: string) => {
-    setEducation(education.filter(edu => edu.id !== id));
+    if (education.length > 1) {
+      setEducation(education.filter(edu => edu.id !== id));
+    }
   };
 
   const removeSkill = (id: string) => {
-    setSkills(skills.filter(skill => skill.id !== id));
+    if (skills.length > 1) {
+      setSkills(skills.filter(skill => skill.id !== id));
+    }
   };
 
-  // Download functions
   const downloadPDF = () => {
     const element = document.getElementById('resume-preview');
     if (!element) return;
 
-    // Create a new window for printing
     const printWindow = window.open('', '_blank');
     if (!printWindow) return;
 
@@ -219,7 +211,7 @@ const ResumeGenerator: React.FC = () => {
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `Resume_${personalInfo.fullName.replace(/\s+/g, '_')}.doc`;
+    link.download = `Resume_${personalInfo.fullName.replace(/\s+/g, '_') || 'MyResume'}.doc`;
     link.click();
     URL.revokeObjectURL(url);
   };
@@ -227,13 +219,11 @@ const ResumeGenerator: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
         <div className="text-center mb-8 pt-8">
           <h1 className="text-4xl font-bold text-gray-800 mb-2">Resume Generator</h1>
           <p className="text-gray-600">Create your professional resume in minutes</p>
         </div>
 
-        {/* Tabs */}
         <div className="flex gap-4 mb-6 justify-center">
           <button
             onClick={() => setActiveTab('edit')}
@@ -259,10 +249,8 @@ const ResumeGenerator: React.FC = () => {
           </button>
         </div>
 
-        {/* Edit Tab */}
         {activeTab === 'edit' && (
           <div className="bg-white rounded-xl shadow-xl p-8 max-w-4xl mx-auto">
-            {/* Personal Information */}
             <div className="mb-8">
               <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center">
                 <User className="mr-2" /> Personal Information
@@ -320,7 +308,6 @@ const ResumeGenerator: React.FC = () => {
               />
             </div>
 
-            {/* Experience */}
             <div className="mb-8">
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-2xl font-bold text-gray-800 flex items-center">
@@ -340,6 +327,7 @@ const ResumeGenerator: React.FC = () => {
                     <button
                       onClick={() => removeExperience(exp.id)}
                       className="text-red-600 hover:text-red-700"
+                      disabled={experiences.length === 1}
                     >
                       <Trash2 className="h-4 w-4" />
                     </button>
@@ -439,7 +427,6 @@ const ResumeGenerator: React.FC = () => {
               ))}
             </div>
 
-            {/* Education */}
             <div className="mb-8">
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-2xl font-bold text-gray-800 flex items-center">
@@ -459,6 +446,7 @@ const ResumeGenerator: React.FC = () => {
                     <button
                       onClick={() => removeEducation(edu.id)}
                       className="text-red-600 hover:text-red-700"
+                      disabled={education.length === 1}
                     >
                       <Trash2 className="h-4 w-4" />
                     </button>
@@ -529,7 +517,6 @@ const ResumeGenerator: React.FC = () => {
               ))}
             </div>
 
-            {/* Skills */}
             <div className="mb-8">
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-2xl font-bold text-gray-800 flex items-center">
@@ -549,6 +536,7 @@ const ResumeGenerator: React.FC = () => {
                     <button
                       onClick={() => removeSkill(skill.id)}
                       className="text-red-600 hover:text-red-700"
+                      disabled={skills.length === 1}
                     >
                       <Trash2 className="h-4 w-4" />
                     </button>
@@ -585,10 +573,8 @@ const ResumeGenerator: React.FC = () => {
           </div>
         )}
 
-        {/* Preview Tab */}
         {activeTab === 'preview' && (
           <div className="max-w-5xl mx-auto">
-            {/* Download Buttons */}
             <div className="flex gap-4 justify-center mb-6">
               <button
                 onClick={downloadPDF}
@@ -606,11 +592,9 @@ const ResumeGenerator: React.FC = () => {
               </button>
             </div>
 
-            {/* Resume Preview */}
             <div className="bg-white rounded-xl shadow-2xl p-12" id="resume-preview">
               <div className="resume">
-                {/* Header */}
-                <h1 className="text-4xl font-bold text-blue-700 mb-2">{personalInfo.fullName}</h1>
+                <h1 className="text-4xl font-bold text-blue-700 mb-2">{personalInfo.fullName || 'Your Name'}</h1>
                 <div className="contact flex flex-wrap gap-4 text-sm text-gray-600 mb-6">
                   {personalInfo.email && (
                     <span className="flex items-center">
@@ -644,7 +628,6 @@ const ResumeGenerator: React.FC = () => {
                   )}
                 </div>
 
-                {/* Summary */}
                 {personalInfo.summary && (
                   <div className="section mb-6">
                     <h2 className="section-title text-xl font-bold text-blue-700 border-b-2 border-blue-700 pb-1 mb-3">
@@ -654,7 +637,6 @@ const ResumeGenerator: React.FC = () => {
                   </div>
                 )}
 
-                {/* Experience */}
                 {experiences.length > 0 && experiences[0].title && (
                   <div className="section mb-6">
                     <h2 className="section-title text-xl font-bold text-blue-700 border-b-2 border-blue-700 pb-1 mb-3">
@@ -685,7 +667,6 @@ const ResumeGenerator: React.FC = () => {
                   </div>
                 )}
 
-                {/* Education */}
                 {education.length > 0 && education[0].degree && (
                   <div className="section mb-6">
                     <h2 className="section-title text-xl font-bold text-blue-700 border-b-2 border-blue-700 pb-1 mb-3">
@@ -712,7 +693,6 @@ const ResumeGenerator: React.FC = () => {
                   </div>
                 )}
 
-                {/* Skills */}
                 {skills.length > 0 && skills[0].category && (
                   <div className="section">
                     <h2 className="section-title text-xl font-bold text-blue-700 border-b-2 border-blue-700 pb-1 mb-3">
@@ -739,4 +719,4 @@ const ResumeGenerator: React.FC = () => {
   );
 };
 
-export default ResumeGenerator
+export default ResumeGenerator;
