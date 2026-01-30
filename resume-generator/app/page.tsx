@@ -357,7 +357,7 @@ const generatePDFDocument = (data: CVData): Blob => {
   ) => {
     doc.setFontSize(size);
     doc.setFont('helvetica', isBold ? 'bold' : 'normal');
-    doc.setTextColor(...color);
+   
 
     const lines = doc.splitTextToSize(text, maxWidth);
     lines.forEach((line: string) => {
