@@ -1,5 +1,4 @@
 'use client';
-
 import { useState } from 'react';
 import { Download, FileText, Loader2, RefreshCw, Plus, Trash2, Eye } from 'lucide-react';
 import { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType } from 'docx';
@@ -238,9 +237,7 @@ const generateWordDocument = async (data: CVData): Promise<Blob> => {
       );
 
       const years =
-        edu.startYear && edu.endYear
-          ? `${edu.startYear} - ${edu.endYear}`
-          : edu.endYear || '';
+        edu.startYear && edu.endYear ? `${edu.startYear} - ${edu.endYear}` : edu.endYear || '';
 
       children.push(
         new Paragraph({
@@ -342,7 +339,6 @@ const generateWordDocument = async (data: CVData): Promise<Blob> => {
 
 const generatePDFDocument = (data: CVData): Blob => {
   const doc = new jsPDF();
-
   let y = 20;
   const pageWidth = doc.internal.pageSize.width;
   const margin = 20;
@@ -357,8 +353,6 @@ const generatePDFDocument = (data: CVData): Blob => {
   ) => {
     doc.setFontSize(size);
     doc.setFont('helvetica', isBold ? 'bold' : 'normal');
-   
-
     const lines = doc.splitTextToSize(text, maxWidth);
     lines.forEach((line: string) => {
       if (y > 270) {
@@ -379,7 +373,6 @@ const generatePDFDocument = (data: CVData): Blob => {
 
   addText(data.personalInfo.fullName, 24, true, [26, 54, 93], 'center');
   y += 2;
-
   addText(data.personalInfo.title, 14, false, [37, 99, 235], 'center');
   y += 8;
 
@@ -392,6 +385,7 @@ const generatePDFDocument = (data: CVData): Blob => {
   ]
     .filter(Boolean)
     .join(' | ');
+
   addText(contactInfo, 10, false, [100, 116, 139], 'center');
   y += 10;
 
@@ -435,9 +429,7 @@ const generatePDFDocument = (data: CVData): Blob => {
       addText(edu.degree, 12, true);
       y += 1;
       const years =
-        edu.startYear && edu.endYear
-          ? `${edu.startYear} - ${edu.endYear}`
-          : edu.endYear || '';
+        edu.startYear && edu.endYear ? `${edu.startYear} - ${edu.endYear}` : edu.endYear || '';
       addText(
         `${edu.institution}${years ? ' | ' + years : ''}`,
         10,
@@ -516,18 +508,22 @@ export default function Home() {
 
   const validateForm = () => {
     const { personalInfo, summary, skills } = cvData;
+
     if (!personalInfo.fullName || !personalInfo.title || !personalInfo.email || !personalInfo.phone) {
       alert('Por favor completa todos los campos obligatorios de información personal');
       return false;
     }
+
     if (!summary) {
       alert('Por favor completa el resumen profesional');
       return false;
     }
+
     if (skills.length === 0) {
       alert('Por favor agrega al menos una habilidad');
       return false;
     }
+
     return true;
   };
 
@@ -616,21 +612,19 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen py-8 px-4">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+      <div className="container mx-auto px-4 py-8">
         {/* Header */}
-        <header className="text-center mb-12 animate-fade-in">
-          <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl p-10 border border-blue-100">
-            <h1 className="text-6xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent mb-4">
-              Generador de CV Profesional
-            </h1>
-            <p className="text-xl text-slate-600 font-medium">
-              Crea tu currículum perfecto en minutos ✨
-            </p>
-          </div>
-        </header>
+        <div className="text-center mb-12">
+          <h1 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 mb-4">
+            Generador de CV Profesional
+          </h1>
+          <p className="text-xl text-slate-600 font-medium">
+            Crea tu currículum perfecto en minutos ✨
+          </p>
+        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid lg:grid-cols-2 gap-8">
           {/* FORMULARIO */}
           <div className="space-y-6">
             {/* Información Personal */}
@@ -647,11 +641,15 @@ export default function Home() {
                     type="text"
                     className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-slate-900"
                     value={cvData.personalInfo.fullName}
-                    onChange={(e) => setCvData({ ...cvData, personalInfo: { ...cvData.personalInfo, fullName: e.target.value }})}
+                    onChange={(e) =>
+                      setCvData({
+                        ...cvData,
+                        personalInfo: { ...cvData.personalInfo, fullName: e.target.value },
+                      })
+                    }
                     placeholder="Juan Pérez"
                   />
                 </div>
-
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 mb-2 uppercase tracking-wide">
                     Título Profesional *
@@ -660,11 +658,15 @@ export default function Home() {
                     type="text"
                     className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-slate-900"
                     value={cvData.personalInfo.title}
-                    onChange={(e) => setCvData({ ...cvData, personalInfo: { ...cvData.personalInfo, title: e.target.value }})}
+                    onChange={(e) =>
+                      setCvData({
+                        ...cvData,
+                        personalInfo: { ...cvData.personalInfo, title: e.target.value },
+                      })
+                    }
                     placeholder="Desarrollador Full Stack"
                   />
                 </div>
-
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-semibold text-slate-700 mb-2 uppercase tracking-wide">
@@ -674,11 +676,15 @@ export default function Home() {
                       type="email"
                       className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-slate-900"
                       value={cvData.personalInfo.email}
-                      onChange={(e) => setCvData({ ...cvData, personalInfo: { ...cvData.personalInfo, email: e.target.value }})}
+                      onChange={(e) =>
+                        setCvData({
+                          ...cvData,
+                          personalInfo: { ...cvData.personalInfo, email: e.target.value },
+                        })
+                      }
                       placeholder="juan@ejemplo.com"
                     />
                   </div>
-
                   <div>
                     <label className="block text-sm font-semibold text-slate-700 mb-2 uppercase tracking-wide">
                       Teléfono *
@@ -687,12 +693,16 @@ export default function Home() {
                       type="tel"
                       className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-slate-900"
                       value={cvData.personalInfo.phone}
-                      onChange={(e) => setCvData({ ...cvData, personalInfo: { ...cvData.personalInfo, phone: e.target.value }})}
+                      onChange={(e) =>
+                        setCvData({
+                          ...cvData,
+                          personalInfo: { ...cvData.personalInfo, phone: e.target.value },
+                        })
+                      }
                       placeholder="+51 999 999 999"
                     />
                   </div>
                 </div>
-
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 mb-2 uppercase tracking-wide">
                     Ubicación
@@ -700,12 +710,16 @@ export default function Home() {
                   <input
                     type="text"
                     className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-slate-900"
-                    value={cvData.personalInfo.location || ''}
-                    onChange={(e) => setCvData({ ...cvData, personalInfo: { ...cvData.personalInfo, location: e.target.value }})}
+                    value={cvData.personalInfo.location}
+                    onChange={(e) =>
+                      setCvData({
+                        ...cvData,
+                        personalInfo: { ...cvData.personalInfo, location: e.target.value },
+                      })
+                    }
                     placeholder="Lima, Perú"
                   />
                 </div>
-
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 mb-2 uppercase tracking-wide">
                     LinkedIn
@@ -713,8 +727,13 @@ export default function Home() {
                   <input
                     type="url"
                     className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-slate-900"
-                    value={cvData.personalInfo.linkedin || ''}
-                    onChange={(e) => setCvData({ ...cvData, personalInfo: { ...cvData.personalInfo, linkedin: e.target.value }})}
+                    value={cvData.personalInfo.linkedin}
+                    onChange={(e) =>
+                      setCvData({
+                        ...cvData,
+                        personalInfo: { ...cvData.personalInfo, linkedin: e.target.value },
+                      })
+                    }
                     placeholder="linkedin.com/in/tu-perfil"
                   />
                 </div>
@@ -751,31 +770,43 @@ export default function Home() {
                   onClick={() => {
                     setCvData({
                       ...cvData,
-                      experience: [...cvData.experience, {
-                        id: Date.now().toString(),
-                        title: '',
-                        company: '',
-                        startDate: '',
-                        endDate: '',
-                        description: '',
-                        current: false,
-                      }]
+                      experience: [
+                        ...cvData.experience,
+                        {
+                          id: Date.now().toString(),
+                          title: '',
+                          company: '',
+                          startDate: '',
+                          endDate: '',
+                          description: '',
+                          current: false,
+                        },
+                      ],
                     });
                   }}
                   className="inline-flex items-center gap-2 px-4 py-2 bg-amber-500 text-white rounded-lg hover:bg-amber-600 transition-colors font-semibold"
                 >
-                  <Plus size={18} /> Agregar
+                  <Plus size={18} />
+                  Agregar
                 </button>
               </div>
 
               <div className="space-y-4">
                 {cvData.experience.map((exp, index) => (
-                  <div key={exp.id} className="p-4 bg-slate-50 rounded-lg border-2 border-slate-200">
+                  <div
+                    key={exp.id}
+                    className="p-4 bg-slate-50 rounded-lg border-2 border-slate-200"
+                  >
                     <div className="flex justify-between items-start mb-4">
                       <h3 className="font-semibold text-slate-700">Experiencia {index + 1}</h3>
                       {cvData.experience.length > 1 && (
                         <button
-                          onClick={() => setCvData({ ...cvData, experience: cvData.experience.filter(e => e.id !== exp.id) })}
+                          onClick={() =>
+                            setCvData({
+                              ...cvData,
+                              experience: cvData.experience.filter((e) => e.id !== exp.id),
+                            })
+                          }
                           className="text-red-500 hover:text-red-700"
                         >
                           <Trash2 size={18} />
@@ -789,7 +820,7 @@ export default function Home() {
                         className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-900"
                         value={exp.title}
                         onChange={(e) => {
-                          const newExp = cvData.experience.map(item => 
+                          const newExp = cvData.experience.map((item) =>
                             item.id === exp.id ? { ...item, title: e.target.value } : item
                           );
                           setCvData({ ...cvData, experience: newExp });
@@ -802,7 +833,7 @@ export default function Home() {
                         className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-900"
                         value={exp.company}
                         onChange={(e) => {
-                          const newExp = cvData.experience.map(item => 
+                          const newExp = cvData.experience.map((item) =>
                             item.id === exp.id ? { ...item, company: e.target.value } : item
                           );
                           setCvData({ ...cvData, experience: newExp });
@@ -816,7 +847,7 @@ export default function Home() {
                           className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-900"
                           value={exp.startDate}
                           onChange={(e) => {
-                            const newExp = cvData.experience.map(item => 
+                            const newExp = cvData.experience.map((item) =>
                               item.id === exp.id ? { ...item, startDate: e.target.value } : item
                             );
                             setCvData({ ...cvData, experience: newExp });
@@ -828,7 +859,7 @@ export default function Home() {
                           className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-900"
                           value={exp.endDate}
                           onChange={(e) => {
-                            const newExp = cvData.experience.map(item => 
+                            const newExp = cvData.experience.map((item) =>
                               item.id === exp.id ? { ...item, endDate: e.target.value } : item
                             );
                             setCvData({ ...cvData, experience: newExp });
@@ -842,8 +873,14 @@ export default function Home() {
                           type="checkbox"
                           checked={exp.current || false}
                           onChange={(e) => {
-                            const newExp = cvData.experience.map(item => 
-                              item.id === exp.id ? { ...item, current: e.target.checked, endDate: e.target.checked ? '' : item.endDate } : item
+                            const newExp = cvData.experience.map((item) =>
+                              item.id === exp.id
+                                ? {
+                                    ...item,
+                                    current: e.target.checked,
+                                    endDate: e.target.checked ? '' : item.endDate,
+                                  }
+                                : item
                             );
                             setCvData({ ...cvData, experience: newExp });
                           }}
@@ -857,7 +894,7 @@ export default function Home() {
                         rows={3}
                         value={exp.description}
                         onChange={(e) => {
-                          const newExp = cvData.experience.map(item => 
+                          const newExp = cvData.experience.map((item) =>
                             item.id === exp.id ? { ...item, description: e.target.value } : item
                           );
                           setCvData({ ...cvData, experience: newExp });
@@ -881,29 +918,41 @@ export default function Home() {
                   onClick={() => {
                     setCvData({
                       ...cvData,
-                      education: [...cvData.education, {
-                        id: Date.now().toString(),
-                        degree: '',
-                        institution: '',
-                        startYear: '',
-                        endYear: '',
-                      }]
+                      education: [
+                        ...cvData.education,
+                        {
+                          id: Date.now().toString(),
+                          degree: '',
+                          institution: '',
+                          startYear: '',
+                          endYear: '',
+                        },
+                      ],
                     });
                   }}
                   className="inline-flex items-center gap-2 px-4 py-2 bg-amber-500 text-white rounded-lg hover:bg-amber-600 transition-colors font-semibold"
                 >
-                  <Plus size={18} /> Agregar
+                  <Plus size={18} />
+                  Agregar
                 </button>
               </div>
 
               <div className="space-y-4">
                 {cvData.education.map((edu, index) => (
-                  <div key={edu.id} className="p-4 bg-slate-50 rounded-lg border-2 border-slate-200">
+                  <div
+                    key={edu.id}
+                    className="p-4 bg-slate-50 rounded-lg border-2 border-slate-200"
+                  >
                     <div className="flex justify-between items-start mb-4">
                       <h3 className="font-semibold text-slate-700">Educación {index + 1}</h3>
                       {cvData.education.length > 1 && (
                         <button
-                          onClick={() => setCvData({ ...cvData, education: cvData.education.filter(e => e.id !== edu.id) })}
+                          onClick={() =>
+                            setCvData({
+                              ...cvData,
+                              education: cvData.education.filter((e) => e.id !== edu.id),
+                            })
+                          }
                           className="text-red-500 hover:text-red-700"
                         >
                           <Trash2 size={18} />
@@ -917,7 +966,7 @@ export default function Home() {
                         className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-900"
                         value={edu.degree}
                         onChange={(e) => {
-                          const newEdu = cvData.education.map(item => 
+                          const newEdu = cvData.education.map((item) =>
                             item.id === edu.id ? { ...item, degree: e.target.value } : item
                           );
                           setCvData({ ...cvData, education: newEdu });
@@ -930,7 +979,7 @@ export default function Home() {
                         className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-900"
                         value={edu.institution}
                         onChange={(e) => {
-                          const newEdu = cvData.education.map(item => 
+                          const newEdu = cvData.education.map((item) =>
                             item.id === edu.id ? { ...item, institution: e.target.value } : item
                           );
                           setCvData({ ...cvData, education: newEdu });
@@ -944,7 +993,7 @@ export default function Home() {
                           className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-900"
                           value={edu.startYear}
                           onChange={(e) => {
-                            const newEdu = cvData.education.map(item => 
+                            const newEdu = cvData.education.map((item) =>
                               item.id === edu.id ? { ...item, startYear: e.target.value } : item
                             );
                             setCvData({ ...cvData, education: newEdu });
@@ -957,7 +1006,7 @@ export default function Home() {
                           className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-900"
                           value={edu.endYear}
                           onChange={(e) => {
-                            const newEdu = cvData.education.map(item => 
+                            const newEdu = cvData.education.map((item) =>
                               item.id === edu.id ? { ...item, endYear: e.target.value } : item
                             );
                             setCvData({ ...cvData, education: newEdu });
@@ -976,6 +1025,7 @@ export default function Home() {
               <h2 className="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-2">
                 <span className="text-3xl">🚀</span> Habilidades e Idiomas
               </h2>
+
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 mb-2 uppercase tracking-wide">
@@ -986,7 +1036,10 @@ export default function Home() {
                     rows={4}
                     value={cvData.skills.join(', ')}
                     onChange={(e) => {
-                      const skills = e.target.value.split(',').map(s => s.trim()).filter(s => s);
+                      const skills = e.target.value
+                        .split(',')
+                        .map((s) => s.trim())
+                        .filter((s) => s);
                       setCvData({ ...cvData, skills });
                     }}
                     placeholder="JavaScript, React, Node.js, Python, SQL..."
@@ -1003,7 +1056,10 @@ export default function Home() {
                     rows={3}
                     value={cvData.languages.join(', ')}
                     onChange={(e) => {
-                      const languages = e.target.value.split(',').map(s => s.trim()).filter(s => s);
+                      const languages = e.target.value
+                        .split(',')
+                        .map((s) => s.trim())
+                        .filter((s) => s);
                       setCvData({ ...cvData, languages });
                     }}
                     placeholder="Español (Nativo), Inglés (Avanzado)..."
@@ -1019,14 +1075,18 @@ export default function Home() {
                 onClick={handleReset}
                 className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-4 bg-white text-slate-700 border-2 border-slate-300 rounded-lg hover:bg-slate-50 transition-all font-semibold"
               >
-                <RefreshCw size={20} /> Limpiar
+                <RefreshCw size={20} />
+                Limpiar
               </button>
+
               <button
                 onClick={() => setShowPreview(!showPreview)}
                 className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-4 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-all font-semibold shadow-lg"
               >
-                <Eye size={20} /> {showPreview ? 'Ocultar' : 'Vista Previa'}
+                <Eye size={20} />
+                {showPreview ? 'Ocultar' : 'Vista Previa'}
               </button>
+
               <button
                 onClick={handleGenerate}
                 disabled={isGenerating}
@@ -1034,11 +1094,13 @@ export default function Home() {
               >
                 {isGenerating ? (
                   <>
-                    <Loader2 size={20} className="animate-spin" /> Generando...
+                    <Loader2 size={20} className="animate-spin" />
+                    Generando...
                   </>
                 ) : (
                   <>
-                    <FileText size={20} /> Generar CV
+                    <FileText size={20} />
+                    Generar CV
                   </>
                 )}
               </button>
@@ -1050,7 +1112,8 @@ export default function Home() {
             {showPreview && (
               <div className="bg-white rounded-xl shadow-2xl border border-slate-200 p-8 animate-slide-up">
                 <h2 className="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-2">
-                  <Eye size={24} className="text-purple-600" /> Vista Previa
+                  <Eye size={24} className="text-purple-600" />
+                  Vista Previa
                 </h2>
 
                 <div className="space-y-6 max-h-[calc(100vh-200px)] overflow-y-auto pr-4">
@@ -1081,44 +1144,52 @@ export default function Home() {
                   )}
 
                   {/* Experiencia */}
-                  {cvData.experience.some(exp => exp.title || exp.company) && (
+                  {cvData.experience.some((exp) => exp.title || exp.company) && (
                     <div>
                       <h3 className="text-lg font-bold text-slate-800 mb-3 uppercase border-b border-slate-300 pb-1">
                         Experiencia Laboral
                       </h3>
                       <div className="space-y-4">
-                        {cvData.experience.map((exp) => (
-                          (exp.title || exp.company) && (
-                            <div key={exp.id}>
-                              <h4 className="font-bold text-slate-900">{exp.title}</h4>
-                              <p className="text-sm text-slate-600 italic mb-1">
-                                {exp.company} | {formatDate(exp.startDate)} - {exp.current ? 'Presente' : formatDate(exp.endDate)}
-                              </p>
-                              {exp.description && <p className="text-sm text-slate-700">{exp.description}</p>}
-                            </div>
-                          )
-                        ))}
+                        {cvData.experience.map(
+                          (exp) =>
+                            (exp.title || exp.company) && (
+                              <div key={exp.id}>
+                                <h4 className="font-bold text-slate-900">{exp.title}</h4>
+                                <p className="text-sm text-slate-600 italic mb-1">
+                                  {exp.company} | {formatDate(exp.startDate)} -{' '}
+                                  {exp.current ? 'Presente' : formatDate(exp.endDate)}
+                                </p>
+                                {exp.description && (
+                                  <p className="text-sm text-slate-700">{exp.description}</p>
+                                )}
+                              </div>
+                            )
+                        )}
                       </div>
                     </div>
                   )}
 
                   {/* Educación */}
-                  {cvData.education.some(edu => edu.degree || edu.institution) && (
+                  {cvData.education.some((edu) => edu.degree || edu.institution) && (
                     <div>
                       <h3 className="text-lg font-bold text-slate-800 mb-3 uppercase border-b border-slate-300 pb-1">
                         Educación
                       </h3>
                       <div className="space-y-3">
-                        {cvData.education.map((edu) => (
-                          (edu.degree || edu.institution) && (
-                            <div key={edu.id}>
-                              <h4 className="font-bold text-slate-900">{edu.degree}</h4>
-                              <p className="text-sm text-slate-600 italic">
-                                {edu.institution} {edu.startYear && edu.endYear && `| ${edu.startYear} - ${edu.endYear}`}
-                              </p>
-                            </div>
-                          )
-                        ))}
+                        {cvData.education.map(
+                          (edu) =>
+                            (edu.degree || edu.institution) && (
+                              <div key={edu.id}>
+                                <h4 className="font-bold text-slate-900">{edu.degree}</h4>
+                                <p className="text-sm text-slate-600 italic">
+                                  {edu.institution}{' '}
+                                  {edu.startYear &&
+                                    edu.endYear &&
+                                    `| ${edu.startYear} - ${edu.endYear}`}
+                                </p>
+                              </div>
+                            )
+                        )}
                       </div>
                     </div>
                   )}
@@ -1154,24 +1225,26 @@ export default function Home() {
               >
                 <div className="text-center">
                   <div className="text-6xl mb-4">🎉</div>
-                  <h3 className="text-3xl font-bold text-green-700 mb-3">
-                    ¡Tu CV está listo!
-                  </h3>
+                  <h3 className="text-3xl font-bold text-green-700 mb-3">¡Tu CV está listo!</h3>
                   <p className="text-slate-600 mb-6 text-lg">
                     Descarga tu currículum en el formato que prefieras
                   </p>
+
                   <div className="space-y-3">
                     <button
                       onClick={downloadWord}
                       className="w-full inline-flex items-center justify-center gap-3 px-6 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all font-semibold text-lg shadow-lg"
                     >
-                      <Download size={24} /> Descargar Word (.docx)
+                      <Download size={24} />
+                      Descargar Word (.docx)
                     </button>
+
                     <button
                       onClick={downloadPDF}
                       className="w-full inline-flex items-center justify-center gap-3 px-6 py-4 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-all font-semibold text-lg shadow-lg"
                     >
-                      <Download size={24} /> Descargar PDF
+                      <Download size={24} />
+                      Descargar PDF
                     </button>
                   </div>
                 </div>
@@ -1179,6 +1252,18 @@ export default function Home() {
             )}
           </div>
         </div>
+
+        {/* Footer con Copyright */}
+        <footer className="mt-16 pb-8">
+          <div className="text-center">
+            <div className="inline-flex items-center gap-2 px-6 py-3 bg-slate-800 text-white rounded-full shadow-lg">
+              <span className="text-sm font-semibold">© {new Date().getFullYear()}</span>
+              <span className="text-slate-400">•</span>
+              <span className="text-sm">Desarrollado por</span>
+              <span className="text-blue-400 font-bold">Gerard Vigo</span>
+            </div>
+          </div>
+        </footer>
       </div>
     </div>
   );
