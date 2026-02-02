@@ -645,7 +645,7 @@ export default function Home() {
                   </label>
                   <input
                     type="text"
-                    className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-slate-900"
                     value={cvData.personalInfo.fullName}
                     onChange={(e) => setCvData({ ...cvData, personalInfo: { ...cvData.personalInfo, fullName: e.target.value }})}
                     placeholder="Juan Pérez"
@@ -658,7 +658,7 @@ export default function Home() {
                   </label>
                   <input
                     type="text"
-                    className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-slate-900"
                     value={cvData.personalInfo.title}
                     onChange={(e) => setCvData({ ...cvData, personalInfo: { ...cvData.personalInfo, title: e.target.value }})}
                     placeholder="Desarrollador Full Stack"
@@ -672,7 +672,7 @@ export default function Home() {
                     </label>
                     <input
                       type="email"
-                      className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                      className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-slate-900"
                       value={cvData.personalInfo.email}
                       onChange={(e) => setCvData({ ...cvData, personalInfo: { ...cvData.personalInfo, email: e.target.value }})}
                       placeholder="juan@ejemplo.com"
@@ -685,7 +685,7 @@ export default function Home() {
                     </label>
                     <input
                       type="tel"
-                      className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                      className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-slate-900"
                       value={cvData.personalInfo.phone}
                       onChange={(e) => setCvData({ ...cvData, personalInfo: { ...cvData.personalInfo, phone: e.target.value }})}
                       placeholder="+51 999 999 999"
@@ -699,7 +699,7 @@ export default function Home() {
                   </label>
                   <input
                     type="text"
-                    className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-slate-900"
                     value={cvData.personalInfo.location || ''}
                     onChange={(e) => setCvData({ ...cvData, personalInfo: { ...cvData.personalInfo, location: e.target.value }})}
                     placeholder="Lima, Perú"
@@ -712,7 +712,7 @@ export default function Home() {
                   </label>
                   <input
                     type="url"
-                    className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-slate-900"
                     value={cvData.personalInfo.linkedin || ''}
                     onChange={(e) => setCvData({ ...cvData, personalInfo: { ...cvData.personalInfo, linkedin: e.target.value }})}
                     placeholder="linkedin.com/in/tu-perfil"
@@ -731,7 +731,7 @@ export default function Home() {
                   Describe tu perfil *
                 </label>
                 <textarea
-                  className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                  className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-slate-900"
                   rows={6}
                   value={cvData.summary}
                   onChange={(e) => setCvData({ ...cvData, summary: e.target.value })}
@@ -786,7 +786,7 @@ export default function Home() {
                     <div className="space-y-3">
                       <input
                         type="text"
-                        className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-900"
                         value={exp.title}
                         onChange={(e) => {
                           const newExp = cvData.experience.map(item => 
@@ -799,7 +799,7 @@ export default function Home() {
 
                       <input
                         type="text"
-                        className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-900"
                         value={exp.company}
                         onChange={(e) => {
                           const newExp = cvData.experience.map(item => 
@@ -813,7 +813,7 @@ export default function Home() {
                       <div className="grid grid-cols-2 gap-3">
                         <input
                           type="month"
-                          className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-900"
                           value={exp.startDate}
                           onChange={(e) => {
                             const newExp = cvData.experience.map(item => 
@@ -825,7 +825,7 @@ export default function Home() {
 
                         <input
                           type="month"
-                          className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-900"
                           value={exp.endDate}
                           onChange={(e) => {
                             const newExp = cvData.experience.map(item => 
@@ -837,7 +837,7 @@ export default function Home() {
                         />
                       </div>
 
-                      <label className="flex items-center gap-2 text-sm">
+                      <label className="flex items-center gap-2 text-sm text-slate-700">
                         <input
                           type="checkbox"
                           checked={exp.current || false}
@@ -853,7 +853,7 @@ export default function Home() {
                       </label>
 
                       <textarea
-                        className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-900"
                         rows={3}
                         value={exp.description}
                         onChange={(e) => {
@@ -914,7 +914,7 @@ export default function Home() {
                     <div className="space-y-3">
                       <input
                         type="text"
-                        className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-900"
                         value={edu.degree}
                         onChange={(e) => {
                           const newEdu = cvData.education.map(item => 
@@ -927,7 +927,7 @@ export default function Home() {
 
                       <input
                         type="text"
-                        className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-900"
                         value={edu.institution}
                         onChange={(e) => {
                           const newEdu = cvData.education.map(item => 
@@ -941,7 +941,7 @@ export default function Home() {
                       <div className="grid grid-cols-2 gap-3">
                         <input
                           type="number"
-                          className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-900"
                           value={edu.startYear}
                           onChange={(e) => {
                             const newEdu = cvData.education.map(item => 
@@ -954,7 +954,7 @@ export default function Home() {
 
                         <input
                           type="number"
-                          className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-900"
                           value={edu.endYear}
                           onChange={(e) => {
                             const newEdu = cvData.education.map(item => 
@@ -982,7 +982,7 @@ export default function Home() {
                     Habilidades Técnicas *
                   </label>
                   <textarea
-                    className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-slate-900"
                     rows={4}
                     value={cvData.skills.join(', ')}
                     onChange={(e) => {
@@ -999,7 +999,7 @@ export default function Home() {
                     Idiomas
                   </label>
                   <textarea
-                    className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-slate-900"
                     rows={3}
                     value={cvData.languages.join(', ')}
                     onChange={(e) => {
